@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HE.Logging", "HE.Logging\HE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HE.Logging.Test", "HE.Logging.Test\HE.Logging.Test.csproj", "{D2CA82A9-B6A4-46D2-A5CA-BCC5B51EAC28}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HE.Core.Test", "HE.Core.Test\HE.Core.Test.csproj", "{32F7B737-1017-4C54-AE9C-F0E7317875D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D2CA82A9-B6A4-46D2-A5CA-BCC5B51EAC28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2CA82A9-B6A4-46D2-A5CA-BCC5B51EAC28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2CA82A9-B6A4-46D2-A5CA-BCC5B51EAC28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32F7B737-1017-4C54-AE9C-F0E7317875D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32F7B737-1017-4C54-AE9C-F0E7317875D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32F7B737-1017-4C54-AE9C-F0E7317875D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32F7B737-1017-4C54-AE9C-F0E7317875D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

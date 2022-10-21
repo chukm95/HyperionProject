@@ -1,4 +1,5 @@
-﻿using OpenTK.Windowing.Desktop;
+﻿using HE.Logging;
+using OpenTK.Windowing.Desktop;
 
 namespace HE.Rendering
 {
@@ -27,6 +28,7 @@ namespace HE.Rendering
         private Thread renderThread;
         private NativeWindow nativeWindow;
         private Barrier syncBarrier;
+        private LogHandle logHandle;
         private bool isRunning;
 
         private Renderer(NativeWindow nativeWindow, Barrier syncBarrier)
@@ -34,13 +36,20 @@ namespace HE.Rendering
             renderThread = new Thread(RenderLoop);
             this.nativeWindow = nativeWindow;
             this.syncBarrier = syncBarrier;
+            logHandle = Logger.CreateLogHandle();
             isRunning = true;
             renderThread.Start();
         }
 
         private void RenderLoop()
         {
-
+            logHandle.WriteInfo("Renderer", "Renderer started!");
+            nativeWindow.Context.MakeCurrent();
+            while(isRunning)
+            {
+                syncBarrier.SignalAndWait();
+            }
+            logHandle.WriteInfo("Renderer", "Renderer stopped!");
         }
 
     }

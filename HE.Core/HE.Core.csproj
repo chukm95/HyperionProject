@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="OpenTK" Version="4.7.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HE.Logging\HE.Logging.csproj" />
+    <ProjectReference Include="..\HE.Rendering\HE.Rendering.csproj" />
+  </ItemGroup>
+
 </Project>
