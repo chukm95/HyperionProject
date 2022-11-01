@@ -1,7 +1,13 @@
-﻿using HE.Logging;
+﻿using HE.Core.Rendering.Shaders;
+using HE.Logging;
 using OpenTK.Windowing.Desktop;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace HE.Rendering
+namespace HE.Core.Rendering
 {
     public class Renderer
     {
@@ -9,7 +15,7 @@ namespace HE.Rendering
 
         public static void Start(NativeWindow nativeWindow, Barrier syncBarrier)
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new Renderer(nativeWindow, syncBarrier);
             }
@@ -17,7 +23,7 @@ namespace HE.Rendering
 
         public static void Stop()
         {
-            if(instance != null)
+            if (instance != null)
             {
                 Volatile.Write(ref instance.isRunning, false);
                 instance.syncBarrier.RemoveParticipant();
@@ -25,10 +31,18 @@ namespace HE.Rendering
             }
         }
 
+        public static ShaderManager ShaderManager
+        {
+            get => instance.shaderManager;
+        }
+
         private Thread renderThread;
         private NativeWindow nativeWindow;
         private Barrier syncBarrier;
         private LogHandle logHandle;
+
+        private ShaderManager shaderManager;
+
         private bool isRunning;
 
         private Renderer(NativeWindow nativeWindow, Barrier syncBarrier)
@@ -37,6 +51,7 @@ namespace HE.Rendering
             this.nativeWindow = nativeWindow;
             this.syncBarrier = syncBarrier;
             logHandle = Logger.CreateLogHandle();
+
             isRunning = true;
             renderThread.Start();
         }
@@ -45,11 +60,40 @@ namespace HE.Rendering
         {
             logHandle.WriteInfo("Renderer", "Renderer started!");
             nativeWindow.Context.MakeCurrent();
-            while(isRunning)
+
+            shaderManager = new ShaderManager();
+
+            //setup sync
+            syncBarrier.SignalAndWait();
+
+            while (isRunning)
             {
-                syncBarrier.SignalAndWait();
+                PreUpdate();
+                Update();
+                PostUpdate();
             }
+
+            shaderManager.Deinitialize();
+
             logHandle.WriteInfo("Renderer", "Renderer stopped!");
+        }
+
+        private void PreUpdate()
+        {
+            shaderManager.Update(logHandle);
+        }
+
+        private void Update()
+        {
+
+        }
+
+        private void PostUpdate()
+        {
+            nativeWindow.Context.SwapBuffers();
+            syncBarrier.SignalAndWait();
+
+            syncBarrier.SignalAndWait();
         }
 
     }

@@ -65,7 +65,7 @@ namespace HE.Core.Util
 
         internal void ProcessEvents()
         {
-            nativeWindow.ProcessEvents();
+            NativeWindow.ProcessWindowEvents(false);
         }
 
         internal void Deinitialize()

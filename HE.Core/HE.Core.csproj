@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HE.Logging\HE.Logging.csproj" />
-    <ProjectReference Include="..\HE.Rendering\HE.Rendering.csproj" />
   </ItemGroup>
 
 </Project>
